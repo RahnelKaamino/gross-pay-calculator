@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Calculator</title>
+    </head>
+    <style>
+        .dark-mode {
+            background-color: black;
+        }
+        img {
+            width: 5%;
+            text-align: center;
+            font-size: 50px;
+        }
+    </style>
+    <body>
+        <img src="download.png" alt="NGO Logo">
+        <div class="container">
+            <div class="Calculator" style="margin: 130px 550px 130px">
+                <div class="calculator-body" style="background-color:lightblue">
+                    <h2 class="calculator-title" style="margin-left: 100px">Gross Pay Calculator</h2>
+                    <div class="calculator" style="margin-top: 20px  ">
+                        <div class="calculator-body">
+                            <h3 class="calculator-title" style="margin-left: 10px">Straight Time (ST)</h3>
+                            <div class="mb-3" style="margin-left: 10px">
+                                <label for="Hours" class="form-label">Straight Time Hours:</label>
+                                <input type="number" class="form-control" id="Hours"
+                                    placeholder="Enter amount of Hours">
+                            </div>
+                            <div class="mb-3" style="margin-left: 10px">
+                                <label for="RateHours" class="form-label">Straight Time Rate/HR: $:</label>
+                                <input type="number" class="form-control" id="RateHours"
+                                    placeholder="Enter Work Rate Hours">
+                            </div>
+                        </div>
+                    </div>
+    
+                    <div class="calculator" style="margin-top: 20px  ">
+                        <div class="calculator-body">
+                            <h3 class="calculator-title" style="margin-left: 10px">Overtime (OT)</h3>
+                            <div class="mb-3" style="margin-left: 10px">
+                                <label for="OTHours" class="form-label">Overtime Hours:</label>
+                                <input type="number" class="form-control" id="OTHours"
+                                    placeholder="Enter amount of Hours">
+                            </div>
+                            <div class="mb-3" style="margin-left: 10px">
+                                <label for="OTRate" class="form-label">Overtime Rate:</label>
+                                <input type="number" class="form-control" id="OTRate"
+                                    placeholder="Enter Overtime rate"
+                                    value="">
+                            </div>
+                        </div>
+                    </div>
+    
+                    <div class="card" style="margin-top: 20px  ">
+                        <div class="card-body">
+                            <h3 class="card-title" style="margin-left: 10px">Double Time (DT)</h3>
+                            <div class="mb-3" style="margin-left: 10px">
+                                <label for="DoubleTimeHours" class="form-label">Double Time Hours:</label>
+                                <input type="number" class="form-control" id="DoubleTimeHours"
+                                    placeholder="Enter amount of Hours">
+                            </div>
+                            <div class="mb-3" style="margin-left: 10px">
+                                <label for="DoubleTimeRateHours" class="form-label">Double Time Rate:</label>
+                                <input type="number" class="form-control" id="DoubleTimeRateHours"
+                                    placeholder="Enter Double Time Rate">
+                            </div>
+                        </div>
+                    </div>
+    
+                    <div style="margin: 20px 170px;">
+                        <button type="button" class="btn-primary" id="submit">Submit</button>
+                    </div>
+    
+                    <div>
+                        <p id="grosspays">
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+            <div class="theme" >
+                <input type="button" class="btn" value="Switch Theme" onClick="switchTheme()">
+                <script>function switchTheme() {
+            var element = document.body;
+            element.classList.toggle("dark-mode");
+        }
+                </script>
+        </div>
+        <script>
+            const straightTime = document.getElementById('Hours');
+            const rateHours = document.getElementById('RateHours');
+            const overtimeHours = document.getElementById('OTHours');
+            const overtimeRate = document.getElementById('OTRate');
+            const doubleTimeHours = document.getElementById('DoubleTimeHours');
+            const doubleTimeRateHours = document.getElementById('DoubleTimeRateHours');
+            const submit = document.getElementById('submit');
+            const displayGrossPay = document.getElementById('grosspays');
+    
+    
+            //Button Function
+            submit.addEventListener('click', function () {
+                const straightTimePay = straightTime.value * rateHours.value;
+                const overtTimeRate = overtimeHours.value *  (overtimeRate.value * rateHours.value);
+                const doubleTimePay = doubleTimeHours.value * ( rateHours.value * doubleTimeRateHours.value);
+                const grossPay = straightTimePay + overtTimeRate + doubleTimePay;
+                
+                displayGrossPay.innerHTML = `Gross Pay: $${grossPay}`;
+            });
+        </script>
+    </body>
+</html>
